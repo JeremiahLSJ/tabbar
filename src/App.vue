@@ -1,23 +1,24 @@
 <template>
   <div class="app">
-    <MyHeader></MyHeader>
-    <MyFooter></MyFooter>
+    <MyHeader title="tabbar案例"></MyHeader>
+    <component :is="componentName"></component>
+    <MyFooter :tabList="tabList" @change-component="componentName = $event"></MyFooter>
   </div>
 </template>
 
 <script>
 import MyHeader from '@/components/MyHeader.vue'
 import MyFooter from '@/components/MyFooter.vue'
-// import MyUserInfo from '@/views/MyUserInfo.vue'
-// import MyGoodsSearch from '@/views/MyGoodsSearch.vue'
-// import MyGoodsList from '@/views/MyGoodsList.vue'
+import MyUserInfo from '@/views/MyUserInfo.vue'
+import MyGoodsSearch from '@/views/MyGoodsSearch.vue'
+import MyGoodsList from '@/views/MyGoodsList.vue'
 export default {
   components: {
     MyHeader,
-    MyFooter
-    // MyUserInfo,
-    // MyGoodsSearch,
-    // MyGoodsList
+    MyFooter,
+    MyUserInfo,
+    MyGoodsSearch,
+    MyGoodsList
   },
   data() {
     return {

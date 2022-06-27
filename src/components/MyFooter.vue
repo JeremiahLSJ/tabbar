@@ -1,16 +1,42 @@
 <template>
   <div class="my-tab-bar">
-    <div class="tab-item">
+    <div :class="['tab-item', {current: currentIndex === index}]" v-for="(item, index) in tabList" :key="index" @click="changeComponent(item.componentName, index)">
       <!-- 图标 -->
-      <span class="iconfont"></span>
+      <span :class="`iconfont ${item.iconText}`"></span>
       <!-- 文字 -->
-      <span></span>
+      <span class="text">{{ item.text }}</span>
     </div>
   </div>
 </template>
 
 <script>
-export default {}
+export default {
+  props: {
+    tabList: {
+      type: Array,
+      required: true,
+      validator(data) {
+        const len = data.length
+        if (len > 2 && len < 5) {
+          return true
+        } else {
+          throw new Error('数组都发错脑子坏掉了？')
+        }
+      }
+    }
+  },
+  data() {
+    return {
+      currentIndex: ''
+    }
+  },
+  methods: {
+    changeComponent(compName, index) {
+      this.currentIndex = index
+      this.$emit('change-component', compName)
+    }
+  }
+}
 </script>
 
 <style lang="less" scoped>
@@ -34,5 +60,8 @@ export default {}
 
 .current {
   color: #1d7bff;
+}
+.text {
+  margin-top: -10px;
 }
 </style>
